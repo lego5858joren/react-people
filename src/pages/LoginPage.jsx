@@ -2,32 +2,32 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "../api/axios";
 
-function LoginPage() {
+function LoginPage({ setUser }) { // accept setUser here
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
   const handleLogin = async () => {
-  try {
-    const response = await axios.post("/auth/login", {
-      username,
-      password
-    });
+    try {
+      const response = await axios.post("/auth/login", {
+        username,
+        password
+      });
 
-    console.log("✅ Login success:", response.data);
-    localStorage.setItem("loggedInUser", username);
+      console.log("✅ Login success:", response.data);
+      localStorage.setItem("loggedInUser", username);
+      setUser(username); // update React state
 
-    if (username === "admin") {
-      navigate("/admin");
-    } else {
-      navigate("/user");
+      if (username === "admin") {
+        navigate("/admin");
+      } else {
+        navigate("/user");
+      }
+    } catch (err) {
+      console.error("❌ Login failed:", err.response?.data || err.message);
+      alert("Login failed: Invalid username or password");
     }
-  } catch (err) {
-    console.error("❌ Login failed:", err.response?.data || err.message);
-    alert("Login failed: Invalid username or password");
-  }
-};
-
+  };
 
   return (
     <div style={{ padding: "1rem" }}>

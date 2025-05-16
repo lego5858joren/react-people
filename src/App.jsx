@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import LoginPage from "./pages/LoginPage";
 import AdminPage from "./pages/AdminPage";
@@ -5,11 +6,11 @@ import UserPage from "./pages/UserPage";
 import ProfilePage from "./pages/ProfilePage";
 
 function App() {
-  const user = localStorage.getItem("loggedInUser");
+  const [user, setUser] = useState(() => localStorage.getItem("loggedInUser") || "");
 
   return (
     <Routes>
-      <Route path="/" element={<LoginPage />} />
+      <Route path="/" element={<LoginPage setUser={setUser} />} />
       <Route
         path="/admin"
         element={user === "admin" ? <AdminPage /> : <Navigate to="/" />}
@@ -19,12 +20,13 @@ function App() {
         element={user && user !== "admin" ? <UserPage /> : <Navigate to="/" />}
       />
       <Route
-    path="/profile/:id"
-    element={user === "admin" ? <ProfilePage /> : <Navigate to="/" />}
-  />
+        path="/profile/:id"
+        element={user === "admin" ? <ProfilePage /> : <Navigate to="/" />}
+      />
     </Routes>
   );
 }
 
 export default App;
+
 
