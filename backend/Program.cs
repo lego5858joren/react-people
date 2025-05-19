@@ -19,8 +19,8 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowReactApp",
         policy => policy.WithOrigins(
-                    "http://localhost:5173",                                  // Local dev frontend
-                    "https://lemon-smoke-059406110.6.azurestaticapps.net")  // Your deployed frontend URL
+                    "http://localhost:5173",                                  
+                    "https://lemon-smoke-059406110.6.azurestaticapps.net")  
                         .AllowAnyHeader()
                         .AllowAnyMethod());
 });
