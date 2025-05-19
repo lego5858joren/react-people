@@ -11,7 +11,7 @@ namespace PeopleApi.Controllers
     [Route("auth")]
     public class AuthController : ControllerBase
     {
-        private readonly string connectionString = "Server=tcp:testserver0799.database.windows.net,1433;Initial Catalog=testdb;Persist Security Info=False;User ID=sqladmin;Password=Unreal@016;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
+        private readonly string connectionString = "Server=tcp:testserver0799.database.windows.net,1433;Initial Catalog=testdb;Persist Security Info=False;User ID=sqladmin;Password={password};MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
 
 
         [HttpPost("login")]
